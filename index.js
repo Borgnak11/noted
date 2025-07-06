@@ -80,14 +80,3 @@ app.get("/delete/:id", async (req, res) => {
 app.listen(port, () => {
     console.log(`Server running on port ${port}`);
 });
-
-//TODO
-//Setup environment variables - DONE
-//Setup up github directory, gitignore, and initial commit
-//CSS/styling
-//I'm thinking a card from bootstrap or something will be good for the notes
-//Look into potential future features, like light/dark mode, is creating user authentication
-//I could start with just creating a user login, so notes can't be accessed without said login
-//Would probably be good to show off a simple user authentication system
-//Maybe look into creating a user system to create new accounts and stuff?
-//Leaving a note here for now, look into stanford free courses? (was it stanford?)
