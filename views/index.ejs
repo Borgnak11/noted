@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="styles/style.css" />
+        <title>Noted.</title>
+    </head>
+
+    <body>
+        <h1 class="box">Hellooo</h1>
+        <form action="/new" method="get">
+            <button>Create</button>
+        </form>
+        <% list.forEach(item => { %>
+            <div class="box">
+                <p >Title: <%= item.title %></p>
+                <p>Content: <%= item.content %></p>
+                <a href="/edit/<%= item.id %>">Edit</a>
+                <a href="/delete/<%= item.id %>">Delete</a>
+            </div>
+        <% }) %>
+
+    </body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+        <title>Noted.</title>
+    </head>
+
+    <body>
+        <h1 class="box">Modify page</h1>
+        <% if(locals.note) { %>
+            <div>
+                <form action="/save/<%= note.id %>" method="post">
+                    <p>Title: </p>
+                    <input type="text" name="title" value="<%= note.title %>"/>
+                    <p>Note Description: </p>
+                    <textarea name="content" rows="15" cols="100%" required><%= note.content %></textarea>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        <% } else { %>
+            <div>
+                <form action="/add" method="post">
+                    <p>Title: </p>
+                    <input type="text" name="title" placeholder="Title" required/>
+                    <p>Note Description: </p>
+                    <textarea name="content" placeholder="Note..." rows="15" cols="100%" required></textarea>
+                    <button type="submit">Create</button>
+                </form>
+            </div>
+        <% } %>
+    </body>
+</html>
