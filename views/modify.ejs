@@ -5,31 +5,41 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" type="text/css" href="../styles/style.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
         <title>Noted.</title>
     </head>
 
     <body>
         <h1 class="box">Modify page</h1>
         <% if(locals.note) { %>
-            <div>
-                <form action="/save/<%= note.id %>" method="post">
-                    <p>Title: </p>
-                    <input type="text" name="title" value="<%= note.title %>"/>
-                    <p>Note Description: </p>
-                    <textarea name="content" rows="15" cols="100%" required><%= note.content %></textarea>
-                    <button type="submit">Save</button>
-                </form>
-            </div>
+            <!--bootstrap form start-->
+            <form class="m-3" style="width: 90%;" action="/save/<%= note.id %>" method="post">
+                <div class="form-group mb-2">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" value="<%= note.title %>">
+                </div>
+                <div class="form-group">
+                    <label for="content" class="form-label">Note</label>
+                    <textarea class="form-control" id="content" name="content" placeholder="Note..." rows="3" required><%= note.content %></textarea>
+                    <button type="submit" class="btn btn-primary mt-3">Save</button>
+                </div>
+            </form>
+            <!--bootstrap form end-->
         <% } else { %>
-            <div>
-                <form action="/add" method="post">
-                    <p>Title: </p>
-                    <input type="text" name="title" placeholder="Title" required/>
-                    <p>Note Description: </p>
-                    <textarea name="content" placeholder="Note..." rows="15" cols="100%" required></textarea>
-                    <button type="submit">Create</button>
-                </form>
-            </div>
+            <!--bootstrap form start-->
+            <form class="m-3" style="width: 90%;" action="/add" method="post">
+                <div class="form-group mb-2">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Title" required>
+                </div>
+                <div class="form-group">
+                    <label for="content" class="form-label">Note</label>
+                    <textarea class="form-control" id="content" name="content" placeholder="Note..." rows="3" required></textarea>
+                    <button type="submit" class="btn btn-primary mt-3">Create</button>
+                </div>
+            </form>
+            <!--bootstrap form end-->
         <% } %>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
     </body>
 </html>
