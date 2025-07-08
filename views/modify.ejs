@@ -10,7 +10,10 @@
     </head>
 
     <body>
-        <h1 class="box">Modify page</h1>
+        <header class="p-3">
+            <h1 class="ms-a"><a href="/" style="color: #47457B">noted.</a></h1>
+        </header>
+        
         <% if(locals.note) { %>
             <!--bootstrap form start-->
             <form class="m-3" style="width: 90%;" action="/save/<%= note.id %>" method="post">

@@ -10,13 +10,16 @@
     </head>
 
     <body>
-        <h1 class="box">noted.</h1>
+        <header class="p-3">
+            <h1 class="ms-a"><a href="/" style="color: #47457B">noted.</a></h1>
+        </header>
+        <br/>
         <form action="/new" method="get">
             <button class="btn btn-primary ms-3">Create</button>
         </form>
         <% list.forEach(item => { %>
             <!--Bootstrap card start-->
-            <div class="card mx-3 my-5" style="width: 90%;">
+            <div class="card mx-3 my-3" style="width: 90%;">
                 <div class="card-body">
                     <h5 class="card-title"><%= item.title %></h5>
                     <!--Note subtitle could be usefull at some point-->

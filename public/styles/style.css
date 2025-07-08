@@ -10,6 +10,20 @@
   cursor: pointer;
   transition: background-color 0.3s;
 }*/
+/*Colors:
+ECEDF7 - Ghost White - using for header background
+DCD5D9 - Timberwold
+B1B1C5 - French Gray
+47457B - Ultra Violet - using for header text
+C2DEF7 - Columbia Blue
+*/
+
+
+header {
+  background-color: #ECEDF7;
+  width: 100%;
+}
+
 
 .box {
     border: 5px solid black;
