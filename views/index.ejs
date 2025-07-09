@@ -17,20 +17,53 @@
         <form action="/new" method="get">
             <button class="btn btn-primary ms-3">Create</button>
         </form>
-        <% list.forEach(item => { %>
-            <!--Bootstrap card start-->
-            <div class="card mx-3 my-3" style="width: 90%;">
-                <div class="card-body">
-                    <h5 class="card-title"><%= item.title %></h5>
-                    <!--Note subtitle could be usefull at some point-->
-                    <!--<h6 class="card-subtitle mb-2 text-body-secondary">Note subtitle</h6>-->
-                    <p class="card-text"><%= item.content %></p>
-                    <a href="/edit/<%= item.id %>">Edit</a>
-                    <a class="ps-1" href="/delete/<%= item.id %>">Delete</a>
-                </div>
-            </div>
-            <!--Bootstrap card end-->
-        <% }) %>
+        
+        <!--New notes container-->
+        <div id="notesContainer">
+
+        </div>
+
+        <!--Bootstrap-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
+        
+        <!--This script tag exists purely to stop VS Code from showing me an error from EJS tags within the script tag-->
+        <script type="application/json" id="notesJSON">
+            <%- JSON.stringify(list)%>
+        </script>
+        <script>
+            //Stringifies the list of notes recieved from the database
+            const raw = document.getElementById('notesJSON').textContent;
+            const notesList = JSON.parse(raw);
+            console.log(notesList);
+
+            //Function to render notes
+            function renderNotes(notes){
+                //gets note container element
+                const container = document.getElementById("notesContainer");
+                //clears any existing content
+                container.innerHTML = '';
+                
+                //creates the HTML card for each item in the notes array
+                notes.forEach(item => {
+                    const card = document.createElement('div');
+                    card.classList.add('card', 'mx-3', 'my-3');
+                    card.style.width = '90%';
+                    card.innerHTML = `
+                        <div class="card-body">
+                            <h5 class="card-title">${item.title}</h5>
+                            <!--Note subtitle could be usefull at some point-->
+                            <!--<h6 class="card-subtitle mb-2 text-body-secondary">Note subtitle</h6>-->
+                            <p class="card-text">${item.content}</p>
+                            <a href="/edit/${item.id}">Edit</a>
+                            <a class="ps-1" href="/delete/${item.id}">Delete</a>
+                        </div>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+
+            //intial call of renderNotes
+            renderNotes(notesList);
+        </script>
     </body>
 </html>
