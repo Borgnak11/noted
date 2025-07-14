@@ -17,7 +17,10 @@
         <form action="/new" method="get">
             <button class="btn btn-primary ms-3">Create</button>
         </form>
-        
+        <!--Should this be inline with the create button? maybe on the other side of the page? maybe in its own section?-->
+        <button type="button" onclick="filterNotesASC()">Filter ASC</button>
+        <button type="button" onclick="filterNotesDESC()">Filter DESC</button>
+
         <!--New notes container-->
         <div id="notesContainer">
 
@@ -26,7 +29,7 @@
         <!--Bootstrap-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
         
-        <!--This script tag exists purely to stop VS Code from showing me an error from EJS tags within the script tag-->
+        <!--This script tag exists purely to stop VS Code from showing me an error for EJS tags within the script tag-->
         <script type="application/json" id="notesJSON">
             <%- JSON.stringify(list)%>
         </script>
@@ -34,7 +37,7 @@
             //Stringifies the list of notes recieved from the database
             const raw = document.getElementById('notesJSON').textContent;
             const notesList = JSON.parse(raw);
-            console.log(notesList);
+            //console.log(notesList);
 
             //Function to render notes
             function renderNotes(notes){
@@ -62,8 +65,56 @@
                 });
             }
 
-            //intial call of renderNotes
+            //Intial call of renderNotes
             renderNotes(notesList);
+
+            //FILTER FUNCTIONS
+            //Function for ordering alphabetically, ascending
+            function filterNotesASC(){
+                //Initializes a new array and coppies notesList
+                let newList = [];
+                for(x = 0; x < notesList.length; x++) {
+                    let index = 0;
+                    let noteTitle = notesList[x].title;
+                    for(i = 0; i < newList.length; i++) {
+                        let thisTitle = newList[i].title;
+                        //Compares the two titles
+                        let compareResult = noteTitle.localeCompare(thisTitle);
+                        if (compareResult == -1) {
+                            //Will force the loop to exit if a place for the note is found
+                            i = newList.length;
+                        } else {
+                            console.log(notesList[x].id + " " + newList[i].id);
+                            index++;
+                        }
+                    }
+                    //Adds not to the newList array at the given index
+                    newList.splice(index, 0, notesList[x]);
+                }
+                //re-renders the notes with the new list
+                renderNotes(newList);
+            }
+            //Function for ordering alphabetically, descending
+            function filterNotesDESC(){
+                //Initializes a new array and coppies notesList
+                let newList = [];
+                for(x = 0; x < notesList.length; x++) {
+                    let index = 0;
+                    let noteTitle = notesList[x].title;
+                    for(i = 0; i < newList.length; i++) {
+                        let thisTitle = newList[i].title;
+                        let compareResult = noteTitle.localeCompare(thisTitle);
+                        if (compareResult == 1) {
+                            i = newList.length;
+                        } else {
+                            index++;
+                        }
+                    }
+                    newList.splice(index, 0, notesList[x]);
+                }
+                //re-renders the notes with the new list
+                renderNotes(newList);
+            }
         </script>
     </body>
 </html>
