@@ -14,7 +14,7 @@
             <h1 class="ms-a"><a href="/" style="color: #47457B">noted.</a></h1>
         </header>
         
-        <% if(locals.note) { %>
+        <% if(locals.note) { %><!--Loads edit page when a note is selected to edit-->
             <!--bootstrap form start-->
             <form class="m-3" style="width: 90%;" action="/save/<%= note.id %>" method="post">
                 <div class="form-group mb-2">
@@ -24,11 +24,18 @@
                 <div class="form-group">
                     <label for="content" class="form-label">Note</label>
                     <textarea class="form-control" id="content" name="content" placeholder="Note..." rows="3" required><%= note.content %></textarea>
-                    <button type="submit" class="btn btn-primary mt-3">Save</button>
                 </div>
+                <!--Not set up to recieve stored priority when editing a note-->
+                <select class="form-select mt-3" aria-label="Default select example" style="width: 10%">
+                    <option selected>Priority</option>
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Save</button>
             </form>
             <!--bootstrap form end-->
-        <% } else { %>
+        <% } else { %><!--Loads the create page when no note is selected-->
             <!--bootstrap form start-->
             <form class="m-3" style="width: 90%;" action="/add" method="post">
                 <div class="form-group mb-2">
@@ -38,8 +45,14 @@
                 <div class="form-group">
                     <label for="content" class="form-label">Note</label>
                     <textarea class="form-control" id="content" name="content" placeholder="Note..." rows="3" required></textarea>
-                    <button type="submit" class="btn btn-primary mt-3">Create</button>
                 </div>
+                <select class="form-select mt-3" aria-label="Default select example" style="width: 10%">
+                    <option selected>Priority</option>
+                    <option value="1">High</option>
+                    <option value="2">Medium</option>
+                    <option value="3">Low</option>
+                </select>
+                <button type="submit" class="btn btn-primary mt-3">Create</button>
             </form>
             <!--bootstrap form end-->
         <% } %>
