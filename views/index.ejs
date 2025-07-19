@@ -54,8 +54,7 @@
                     card.innerHTML = `
                         <div class="card-body">
                             <h5 class="card-title">${item.title}</h5>
-                            <!--Note subtitle could be usefull at some point-->
-                            <!--<h6 class="card-subtitle mb-2 text-body-secondary">Note subtitle</h6>-->
+                            <h6 class="card-subtitle mb-2 text-body-secondary">${item.priority}</h6>
                             <p class="card-text">${item.content}</p>
                             <a href="/edit/${item.id}">Edit</a>
                             <a class="ps-1" href="/delete/${item.id}">Delete</a>

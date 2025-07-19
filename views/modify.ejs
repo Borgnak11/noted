@@ -26,11 +26,31 @@
                     <textarea class="form-control" id="content" name="content" placeholder="Note..." rows="3" required><%= note.content %></textarea>
                 </div>
                 <!--Not set up to recieve stored priority when editing a note-->
-                <select class="form-select mt-3" aria-label="Default select example" style="width: 10%">
-                    <option selected>Priority</option>
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Low</option>
+                <select id="priority" name="priority" class="form-select mt-3" aria-label="Default select example" style="width: 10%">
+                    <% if(note.priority !== null) { %>
+                        <% console.log(note.priority) %>
+                        <% if(note.priority == "High") { %>
+                            <option >Priority</option>
+                            <option value="High" selected>High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low">Low</option>
+                        <% } else if(note.priority == "Medium") {%>
+                            <option >Priority</option>
+                            <option value="High" >High</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Low">Low</option>
+                        <%} else if(note.priority == "Low") { %>
+                            <option >Priority</option>
+                            <option value="High" >High</option>
+                            <option value="Medium">Medium</option>
+                            <option value="Low" selected>Low</option>
+                        <% } %>
+                    <% } else { %>
+                        <option selected>Priority</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                    <% } %>
                 </select>
                 <button type="submit" class="btn btn-primary mt-3">Save</button>
             </form>
@@ -46,11 +66,11 @@
                     <label for="content" class="form-label">Note</label>
                     <textarea class="form-control" id="content" name="content" placeholder="Note..." rows="3" required></textarea>
                 </div>
-                <select class="form-select mt-3" aria-label="Default select example" style="width: 10%">
+                <select id="priority" name="priority" class="form-select mt-3" aria-label="Default select example" style="width: 10%">
                     <option selected>Priority</option>
-                    <option value="1">High</option>
-                    <option value="2">Medium</option>
-                    <option value="3">Low</option>
+                    <option value="High">High</option>
+                    <option value="Medium">Medium</option>
+                    <option value="Low">Low</option>
                 </select>
                 <button type="submit" class="btn btn-primary mt-3">Create</button>
             </form>

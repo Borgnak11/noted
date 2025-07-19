@@ -43,7 +43,8 @@ app.get("/new", (req, res) => {
 app.post("/add", async (req, res) => {
     const noteTitle = req.body.title;
     const noteContent = req.body.content;
-    await db.query("INSERT INTO notes (title, content) VALUES ($1, $2)", [noteTitle, noteContent])
+    const notePrio = req.body.priority;
+    await db.query("INSERT INTO notes (title, content, priority) VALUES ($1, $2, $3)", [noteTitle, noteContent, notePrio]);
     res.redirect("/");
 });
 //edit functionality
@@ -61,7 +62,7 @@ app.post("/save/:id", async (req, res) => {
     //console.log(req.params.id);
     //console.log(req.body.title);
     //console.log(req.body.content);
-    await db.query("UPDATE notes SET title = $1, content = $2 WHERE id=$3;", [req.body.title, req.body.content, req.params.id]);
+    await db.query("UPDATE notes SET title = $1, content = $2, priority = $3 WHERE id=$4;", [req.body.title, req.body.content, req.body.priority, req.params.id]);
     res.redirect("/");
 });
 //delete a post by id
